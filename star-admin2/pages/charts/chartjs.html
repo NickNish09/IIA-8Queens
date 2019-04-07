@@ -83,7 +83,8 @@
                 <div class="card-body">
                   <h4 class="card-title">Nº Rainhas x Tempo</h4>
                   <canvas id="lineChart" style="height:250px"></canvas><br>
-                  <h1>Solução Nº <span id="solution_counter"></span> de <span id="solution_total"></span></h1>
+                  <h1>Solução Nº <span id="solution_counter"></span> de <span id="solution_total"></span></h1><br>
+                  <h6 id="solution_array"></h6>
                 </div>
               </div>
             </div>
@@ -198,7 +199,7 @@
   var PRINTARRAY = [];
 
   function log(text) {
-      document.write(text + "<br/>");
+      $("#solution_array").text((text));
   }
 
   function Queen(width) {
@@ -265,11 +266,11 @@
 
   function main() {
       var instance = new Queen(BOARD_SIZE);
-      log("Tabuleiro (" + instance.width + "x" + instance.width + ")");
+      //log("Tabuleiro (" + instance.width + "x" + instance.width + ")");
       var start = new Date().getTime();
       instance.run();
-      log("...tempo para calculo " + (new Date().getTime() - start) + " ms");
-      log("...com " + instance.solutions.length + " soluções");
+      //log("...tempo para calculo " + (new Date().getTime() - start) + " ms");
+      //log("...com " + instance.solutions.length + " soluções");
       $("#solution_total").text(instance.solutions.length);
 
       if (OUTPUT == 1) {
@@ -296,6 +297,7 @@
       }
       console.log(tabuleiroObject); 
       POSITION_SOLUTION++;
+      log(JSON.stringify(tabuleiroObject));
       $("#solution_counter").text(POSITION_SOLUTION);
       fill_tabuleiro(tabuleiroObject);
   }
